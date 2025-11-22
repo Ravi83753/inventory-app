@@ -3,22 +3,16 @@ const router = express.Router();
 const multer = require('multer');
 const productController = require('../controllers/productController');
 
-// Configure Multer (Temp storage for CSVs)
 const upload = multer({ dest: 'uploads/' });
 
-// API Endpoints
 router.get('/', productController.getProducts);
+router.post('/', productController.createProduct);
 router.put('/:id', productController.updateProduct);
-
-// The Import Route (Accepts file with key 'csvFile')
-router.post('/import', upload.single('csvFile'), productController.importProducts);
-
-// Add this line with your other routes
 router.delete('/:id', productController.deleteProduct);
 
+// CSV Routes
+router.post('/import', upload.single('csvFile'), productController.importProducts);
+router.get('/export', productController.exportProducts); // Added this line!
 router.get('/:id/history', productController.getProductHistory);
-
-router.post('/', productController.createProduct);
-
 
 module.exports = router;

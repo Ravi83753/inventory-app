@@ -1,9 +1,8 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
-// Connect to SQLite database
-// We use path.resolve to ensure the DB file is created in the root folder
-const dbPath = path.resolve(__dirname, '../../inventory.db');
+// CORRECT PATH for Render (Looking inside the same 'backend' folder)
+const dbPath = path.resolve(__dirname, '../inventory.db'); 
 
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
